@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Hello World!</title>
+    <base href="/" />
+    <link href="UserInterface.styles.css" rel="stylesheet" />
+</head>
+
+<body>
+    <!-- App -->
+    <div id="app">
+        <!-- Loading - contents of #app will be replaced when app has loaded -->
+        <p>It's on the way...</p>
+    </div>
+
+    <!-- Unsupported Browser -->
+    <div id="blazor-not-supported" style="display: none;">
+        <h1>Browser not supported</h1>
+        <p>
+            This application uses Web Assembly, which requires a modern browser. Please try again with a browser that supports Web Assembly.
+        </p>
+    </div>
+
+    <script src="_framework/blazor.webassembly.js" autostart="false"></script>
+    <script src="dist/main.js"></script>
+    
+    <!-- Unsupported Browser: control -->
+    <script type="text/javascript">
+        const isWebAssemblySupported = (function () {
+            try {
+                if (typeof WebAssembly === "object" && typeof WebAssembly.instantiate === "function") {
+                    return WebAssembly.validate(Uint8Array.of(0x0, 0x61, 0x73, 0x6d, 0x01, 0x00, 0x00, 0x00));
+                }
+            } catch (e) {
+                return false;
+            }
+            return false;
+        })();
+
+        if (isWebAssemblySupported) {
+            Blazor.start({});
+        } else {
+            document.getElementById('app').style.display = "none";
+            document.getElementById('blazor-not-supported').style.display = "block";
+        }
+    </script>
+</body>
+
+</html>

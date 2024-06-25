@@ -1,0 +1,43 @@
+﻿@attribute [Route(Routes.INDEX)]
+
+<PageTitle>Home</PageTitle>
+
+<h1>Hello, world!</h1>
+
+<br />
+
+<h2>Working Version</h2>
+
+<p>This component is built with BuildRenderTree and it works</p>
+
+<IcTextFieldBuildRenderTree @bind-Value="TextBrt" />
+<p>Value: @TextBrt</p>
+
+<br />
+
+<h2>Not Working Version</h2>
+
+<p>This component is built using razor markup and does not work :(</p>
+
+<p>Click the button to load the non-working component <strong>and then check the console logs</strong></p>
+
+<button @onclick="@(() => showNonWorkingComponent = true)">Load</button>
+
+@if (showNonWorkingComponent)
+{
+    <IcTextField @bind-Value="Text" />
+}
+else
+{
+    <br />
+    <br />
+}
+<p>Value: @Text</p>
+
+@code {
+    private string? Text { get; set; }
+
+    private string? TextBrt { get; set; }
+
+    private bool showNonWorkingComponent = false;
+}

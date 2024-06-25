@@ -1,0 +1,31 @@
+﻿@using System.Linq.Expressions
+@using Microsoft.AspNetCore.Components.Rendering
+@using UserInterface.IcComponents.Events
+@inherits ComponentBase
+
+<ic-text-field @ref="component"
+               label="What is your favourit coffee?"
+               placeholder="please enter..."
+               helper-text="such as Arabic, Robusta or Liberica"
+               value="@htmlValue"
+               @onicInputEvent="Handle">
+</ic-text-field>
+
+@code {
+    private ElementReference component;
+
+    private void Handle(IcValueEventArgs icValueEventArgs)
+    {
+        //TODO: when a breakpoint hits here, we're good!
+    }
+
+    [Parameter, EditorRequired]
+    public virtual string? Value { get; set; }
+    private string? htmlValue = "10";
+
+    [Parameter]
+    public virtual EventCallback<string> ValueChanged { get; set; }
+
+    [Parameter]
+    public virtual Expression<Func<string>>? ValueExpression { get; set; }
+}
